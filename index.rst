@@ -13,7 +13,7 @@ MailServer 文档!
 
 （MTA 邮件传输代理）是一个用来接受并转发邮件的程序，它是整个服务器的关键部分。在Ubuntu中默认的邮件传输代理程序是Postfix，主软件库中的exim4也是完全支持的。
 
-* Postfix :doc:`/postfix` - 将会指导您如何安装并设置Postfix。
+* :doc:`postfix` - 将会指导您如何安装并设置Postfix。
 
 过滤
 --------
