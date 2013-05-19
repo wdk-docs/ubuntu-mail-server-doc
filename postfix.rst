@@ -77,18 +77,20 @@ Configure Postfix to do SMTP AUTH using SASL (saslauthd):
 
 Next edit /etc/postfix/sasl/smtpd.conf and add the following lines:
 
-pwcheck_method: saslauthd
-mech_list: plain login
-Generate certificates to be used for TLS encryption and/or certificate Authentication:
+.. code-block:: ini
 
-touch smtpd.key
-chmod 600 smtpd.key
-openssl genrsa 1024 > smtpd.key
-openssl req -new -key smtpd.key -x509 -days 3650 -out smtpd.crt # has prompts
-openssl req -new -x509 -extensions v3_ca -keyout cakey.pem -out cacert.pem -days 3650 # has prompts
+   pwcheck_method: saslauthd
+   mech_list: plain login
+
+Generate certificates to be used for TLS encryption and/or certificate Authentication:
 
 .. code-block:: sh
 
+   touch smtpd.key
+   chmod 600 smtpd.key
+   openssl genrsa 1024 > smtpd.key
+   openssl req -new -key smtpd.key -x509 -days 3650 -out smtpd.crt # has prompts
+   openssl req -new -x509 -extensions v3_ca -keyout cakey.pem -out cacert.pem -days 3650 # has prompts
    sudo mv smtpd.key /etc/ssl/private/
    sudo mv smtpd.crt /etc/ssl/certs/
    sudo mv cakey.pem /etc/ssl/private/
@@ -171,12 +173,12 @@ The next steps are to configure Postfix to use SASL for SMTP AUTH.
 
 First you will need to install the libsasl2-2, sasl2-bin and libsasl2-modules from the Main repository [i.e. sudo apt-get install them all].
 
-Note: if you are using Ubuntu 6.06 (Dapper Drake) the package name is libsasl2.
+.. note:: if you are using Ubuntu 6.06 (Dapper Drake) the package name is libsasl2.
 
 We have to change a few things to make it work properly. Because Postfix runs chrooted in /var/spool/postfix we have change a couple paths to live in the false root. (ie. /var/run/saslauthd becomes /var/spool/postfix/var/run/saslauthd):
 
 
- Note: by changing the saslauthd path other applications that use saslauthd may be affected. 
+.. note:: by changing the saslauthd path other applications that use saslauthd may be affected. 
 
 First we edit /etc/default/saslauthd in order to activate saslauthd. Remove # in front of START=yes, add the PWDIR, PARAMS, and PIDFILE lines and edit the OPTIONS line at the end:
 
@@ -206,12 +208,14 @@ First we edit /etc/default/saslauthd in order to activate saslauthd. Remove # in
    #make sure you set the options here otherwise it ignores params above and will not work
    OPTIONS="-c -m /var/spool/postfix/var/run/saslauthd"
 
-Note: If you prefer, you can use "shadow" instead of "pam". This will use MD5 hashed password transfer and is perfectly secure. The username and password needed to authenticate will be those of the users on the system you are using on the server.
+.. note:: If you prefer, you can use "shadow" instead of "pam". This will use MD5 hashed password transfer and is perfectly secure. The username and password needed to authenticate will be those of the users on the system you are using on the server.
 
 Next, we update the dpkg "state" of /var/spool/postfix/var/run/saslauthd. The saslauthd init script uses this setting to create the missing directory with the appropriate permissions and ownership:
 
+.. code-block:: ini
 
-dpkg-statoverride --force --update --add root sasl 755 /var/spool/postfix/var/run/saslauthd
+   dpkg-statoverride --force --update --add root sasl 755 /var/spool/postfix/var/run/saslauthd
+
 This may report an error that "--update given" and the "/var/spool/postfix/var/run/saslauthd" directory does not exist. You can ignore this because when you start saslauthd next it will be created.
 
 Finally, start saslauthd:
@@ -225,16 +229,23 @@ Finally, start saslauthd:
 
 To see if SMTP-AUTH and TLS work properly now run the following command:
 
-telnet localhost 25
+.. code-block:: sh
+
+   telnet localhost 25
 
 After you have established the connection to your postfix mail server type
 
-ehlo localhost
+.. code-block:: sh
+
+   ehlo localhost
 
 If you see the lines
 
-250-STARTTLS
-250-AUTH
+.. code-block:: sh
+
+   250-STARTTLS
+   250-AUTH
+
 among others, everything is working.
 
 Type quit to return to the system's shell.
@@ -292,7 +303,9 @@ And restart saslauthd:
 
 If you want to use port 587 as the submission port for SMTP mail rather than 25 (many ISPs block port 25), you will need to edit /etc/postfix/master.cf and uncomment the line 
 
-submission inet n      -       n       -       -       smtpd
+.. code-block:: ini
+
+   submission inet n      -       n       -       -       smtpd
 
 其它 Postfix 指南
 --------------------------
