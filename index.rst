@@ -6,14 +6,14 @@ MailServer 文档!
 介绍
 -----
 
-Setting up an email server is a difficult process involving a number of different programs, each of which needs to be properly configured. The best approach is to install and configure each individual component one by one, ensuring that each one works, and gradually build your mail server.
+由于对服务器的配置需要涉及到数个不同的程序，而只有在所有程序都得到了正确的配置之后服务器才能正常工作，因此这个过程可能会显得比较困难。最好的办法就是一个接一个进行组件的安装配置操作，确保每一个都能工作,逐步地建立起您的邮件服务器。
 
 传输代理
 --------
 
-A Mail Transfer Agent (MTA) is the program which receives and sends out the email from your server, and is therefore the key part. The default MTA in Ubuntu is Postfix, but exim4 is also fully supported and in the main repository.
+Mail Transfer Agent（MTA 邮件传输代理）是一个用来接受并转发邮件的程序，它是整个服务器的关键部分。在Ubuntu中默认的邮件传输代理程序是Postfix，主软件库中的exim4也是完全支持的。
 
-Postfix - this guide explains how to set up Postfix.
+* Postfix - 将会指导您如何安装并设置Postfix。
 
 过滤
 --------
