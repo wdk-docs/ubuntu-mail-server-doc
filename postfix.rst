@@ -59,7 +59,9 @@ You may need to issue this as well:
 
    sudo postconf -e 'mailbox_command ='
 
-Note: This will place new mail in /home/username/Maildir so you will need to configure your Mail Delivery Agent to use the same path.
+.. note::
+
+   This will place new mail in /home/username/Maildir so you will need to configure your Mail Delivery Agent to use the same path.
 
 Configure Postfix to do SMTP AUTH using SASL (saslauthd):
 
@@ -70,12 +72,9 @@ Configure Postfix to do SMTP AUTH using SASL (saslauthd):
    sudo postconf -e 'smtpd_sasl_security_options = noanonymous'
    sudo postconf -e 'broken_sasl_auth_clients = yes'
    sudo postconf -e 'smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination'
-
-.. code-block:: sh
-
    sudo postconf -e 'inet_interfaces = all'
 
-Next edit /etc/postfix/sasl/smtpd.conf and add the following lines:
+下一步编辑 /etc/postfix/sasl/smtpd.conf 添加以下行:
 
 .. code-block:: ini
 
@@ -173,12 +172,16 @@ The next steps are to configure Postfix to use SASL for SMTP AUTH.
 
 First you will need to install the libsasl2-2, sasl2-bin and libsasl2-modules from the Main repository [i.e. sudo apt-get install them all].
 
-.. note:: if you are using Ubuntu 6.06 (Dapper Drake) the package name is libsasl2.
+.. note::
+
+   if you are using Ubuntu 6.06 (Dapper Drake) the package name is libsasl2.
 
 We have to change a few things to make it work properly. Because Postfix runs chrooted in /var/spool/postfix we have change a couple paths to live in the false root. (ie. /var/run/saslauthd becomes /var/spool/postfix/var/run/saslauthd):
 
 
-.. note:: by changing the saslauthd path other applications that use saslauthd may be affected. 
+.. note::
+
+   by changing the saslauthd path other applications that use saslauthd may be affected. 
 
 First we edit /etc/default/saslauthd in order to activate saslauthd. Remove # in front of START=yes, add the PWDIR, PARAMS, and PIDFILE lines and edit the OPTIONS line at the end:
 
@@ -208,7 +211,9 @@ First we edit /etc/default/saslauthd in order to activate saslauthd. Remove # in
    #make sure you set the options here otherwise it ignores params above and will not work
    OPTIONS="-c -m /var/spool/postfix/var/run/saslauthd"
 
-.. note:: If you prefer, you can use "shadow" instead of "pam". This will use MD5 hashed password transfer and is perfectly secure. The username and password needed to authenticate will be those of the users on the system you are using on the server.
+.. note::
+
+   If you prefer, you can use "shadow" instead of "pam". This will use MD5 hashed password transfer and is perfectly secure. The username and password needed to authenticate will be those of the users on the system you are using on the server.
 
 Next, we update the dpkg "state" of /var/spool/postfix/var/run/saslauthd. The saslauthd init script uses this setting to create the missing directory with the appropriate permissions and ownership:
 
@@ -367,6 +372,8 @@ Dovecot SASL
 
 The PostfixDovecotSASL guide will help you configure Postfix to use Dovecot's SASL implementation. Using Dovecot SASL may be preferable if you want to run Postfix in a chroot and need to use Cyrus SASL for other services.
 
-Note: this guide has been tested on Ubuntu 6.06 (Dapper) and Ubuntu 7.10 (Gutsy)
+.. note::
+
+   this guide has been tested on Ubuntu 6.06 (Dapper) and Ubuntu 7.10 (Gutsy)
 
 
