@@ -4,9 +4,11 @@ Postfix
 介绍
 -----
 
-Postfix is the default Mail Transfer Agent (MTA) for Ubuntu. It is in Ubuntu's main repository, which means that it receives security updates. This guide explains how to install and configure postfix and set it up as an SMTP server using a secure connection.
+Postfix是一个邮件传输客户端(MTA),它也是ubuntu中默认的邮件传输客户端.它是Ubuntu的main软件库中的一个软件.这意味着它拥有安全更新.这份指南告诉你如何安装及配置postfix并将其设置成一个使用安全连接的SMTP服务器.
 
-What is a Mail Transfer Agent
+什么是邮件传输代理
+-------------------
+
 In other words, it's a mail server not a mail client like Thunderbird, Evolution, Outlook, Eudora, or a web-based email service like Yahoo, GMail, Hotmail, Earthlink, Comcast, SBCGlobal.net, ATT.net etc.... If you worked for a company named Acme and owned acme.com, you could provide your employees with email addresses @acme.com. Employees could send an receive email through your computer, but not without your computer running all the time. If all your email addresses are at a domain (@gmail.com, @yahoo.com) you do not own (you don't own Google) or do not host (acme.com) then you do not need this at all. 
 
 安装
@@ -142,7 +144,10 @@ tls_random_source = dev:/dev/urandom
 Restart the postfix daemon like this:
 
 sudo /etc/init.d/postfix restart
-Authentication
+
+身份验证
+--------
+
 The next steps are to configure Postfix to use SASL for SMTP AUTH.
 
 First you will need to install the libsasl2-2, sasl2-bin and libsasl2-modules from the Main repository [i.e. sudo apt-get install them all].
@@ -192,7 +197,10 @@ Finally, start saslauthd:
 
 
 sudo /etc/init.d/saslauthd start
-Testing
+
+测试
+----
+
 To see if SMTP-AUTH and TLS work properly now run the following command:
 
 telnet localhost 25
@@ -209,8 +217,11 @@ among others, everything is working.
 
 Type quit to return to the system's shell.
 
-Troubleshooting
+检修
+----
+ 
 Remove Postfix from chroot
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you run into issues while running Postfix you may be asked to remove Postfix from chroot to better diagnose the problem. In order to do that you will need to edit /etc/postfix/master.cf locate the following line:
 
 smtp      inet  n       -       -       -       -       smtpd
@@ -222,7 +233,10 @@ Then restart Postfix:
 
 
 sudo /etc/init.d/postfix restart
+
 Configuring saslauthd to Default
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 If you don't want to run Postfix in a chroot, or you'd like to not use chroot for troubleshooting purposes you will probably also want to return saslauthd back to its default configuration.
 
 The first step in accomplishing this is to edit /etc/default/saslauthd comment the following lines we added above:
@@ -239,34 +253,52 @@ And restart saslauthd:
 
 
 sudo /etc/init.d/saslauthd restart
+
 Using Port 587 for Secure Submission
+-------------------------------------------
+
 If you want to use port 587 as the submission port for SMTP mail rather than 25 (many ISPs block port 25), you will need to edit /etc/postfix/master.cf and uncomment the line 
 
 submission inet n      -       n       -       -       smtpd
-Other Postfix Guides
+
+其它 Postfix 指南
+--------------------------
+
 These guides will teach you how to setup Postfix mail servers, from basic to advanced.
 
 Postfix Basic Setup
+------------------------
+
 Postfix Basic Setup Howto will teach you the concepts of Posfix and how you can get Postfix basics set up and running. If you are new to Postfix it is recomended to follow this guide first.
 
 Postfix Virtual Mailbox and Antivirus Filtering
+------------------------
+
 Postfix Virtual MailBox ClamSmtp Howto will teach you how to setup virtual mailboxes using non-Linux accounts where each user will authenticate using their email address with Dovecot POP3/IMAP server and ClamSMTP Antivirus to filter both incoming and out going mails for known viruses.
 
 Postfix Setup For Sender Policy Framework (SPF) Checking
+------------------------
+
 Postfix SPF will show you how to add SPF checking to your existing Postfix setup. This allows your server to reject mail from unauthorized sources.
 
 Postfix Setup For DKIM email signing and verification
+------------------------
+
 Postfix DKIM will guide you through the setup process of dkim-milter for you existing Postfix installation. This will allow your server to sign and verify emails using DKIM.
 
 Add Dspam to Postfix
+------------------------
+
 Postfix Dspam will guide you through the setup process of dspam for you existing Postfix installation. This will enable on your mail server high quality statistical spam filter Dspam.
 
 Postfix Complete Solution
+------------------------
+
 Postfix Complete Virtual Mail System Howto will help you if you are managing a large number of virtual domains at an ISP level or in a large corporation where you mange few hundred or thousand mail domains. This guide is appropriate if you are looking a complete solution with:
 
-Web based system administration
-Unlimited number of domains
-Virtual mail users without the need for shell accounts
+# Web based system administration
+# Unlimited number of domains
+# Virtual mail users without the need for shell accounts
 Domain specific user names
 Mailbox quotas
 Web access to email accounts
@@ -278,10 +310,15 @@ SSL for transport layer security
 Strong spam filtering
 Anti-virus filtering
 Log Analysis
+
 Dovecot LDAP
+------------------------
+
 The Postfix/DovecotLDAP guide will help you configure Postfix to use Dovecot as MDA with LDAP users. 
 
 Dovecot SASL
+------------------------
+
 The PostfixDovecotSASL guide will help you configure Postfix to use Dovecot's SASL implementation. Using Dovecot SASL may be preferable if you want to run Postfix in a chroot and need to use Cyrus SASL for other services.
 
 Note: this guide has been tested on Ubuntu 6.06 (Dapper) and Ubuntu 7.10 (Gutsy)
