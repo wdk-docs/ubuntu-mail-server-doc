@@ -18,7 +18,7 @@ Mail Transfer Agent（MTA 邮件传输代理）是一个用来接受并转发邮
 过滤
 --------
 
-You can add filtering in your mail chain, mainly in order to detect spam and viruses.
+您可以添加过滤到您的邮件链中，主要是为了检测垃圾邮件和病毒。
 
 * PostfixAmavisNew - this guide explains how to integrate amavisd-new with Postfix.
 * PostfixGreylisting - this guide explains how to install Postgrey to implement greylisting
@@ -54,5 +54,6 @@ You can add to your mail server a mailing-list system to deliver mails to a larg
 * Mailman - this guide explains howto setup a mailman installation on Postfix and Exim.
 
 相关文章
+--------
 
 * POP3Aggregator - this guide explains how to set up an IMAP mail server with Dovecot that will download your mail from an external POP3 server, and allow you to access the mail using any IMAP-compatible email client.
