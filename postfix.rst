@@ -114,7 +114,7 @@ Configure Postfix to do TLS encryption for both incoming and outgoing mail:
 
 The file /etc/postfix/main.cf should now look like this:
 
-.. code-block: ini
+.. code-block:: ini
 
    # See /usr/share/postfix/main.cf.dist for a commented, more complete version
 
