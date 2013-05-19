@@ -11,9 +11,9 @@ MailServer 文档!
 传输代理
 --------
 
-Mail Transfer Agent（MTA 邮件传输代理）是一个用来接受并转发邮件的程序，它是整个服务器的关键部分。在Ubuntu中默认的邮件传输代理程序是Postfix，主软件库中的exim4也是完全支持的。
+（MTA 邮件传输代理）是一个用来接受并转发邮件的程序，它是整个服务器的关键部分。在Ubuntu中默认的邮件传输代理程序是Postfix，主软件库中的exim4也是完全支持的。
 
-* Postfix - 将会指导您如何安装并设置Postfix。
+* Postfix :doc:`/postfix` - 将会指导您如何安装并设置Postfix。
 
 过滤
 --------
@@ -27,7 +27,7 @@ Mail Transfer Agent（MTA 邮件传输代理）是一个用来接受并转发邮
 分发代理
 --------
 
-In order to allow you or others to download email from other locations, you need to setup an IMAP or POP3 server. Again, there are many of these, with different advantages and disadvantages. All the servers presented here can be found in the Ubuntu main repository, which means that it receives security updates when necessary.
+为了让您或者是其他人能够从其他地点下载邮件，您需要安装并设置一台IMAP或者POP3邮件服务器。此类服务器数量众多，各有优缺。在这里所提到的所有的服务器都能够在Ubuntu主软件仓库中找到，这就意味着它们能在需要时进行安全升级。
 
 * Dovecot - this guide explains how to set up Dovecot as a mail server. Dovecot is a good mail server which is simple to setup.
 
