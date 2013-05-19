@@ -305,27 +305,27 @@ These guides will teach you how to setup Postfix mail servers, from basic to adv
 Postfix Basic Setup Howto will teach you the concepts of Posfix and how you can get Postfix basics set up and running. If you are new to Postfix it is recomended to follow this guide first.
 
 虚拟邮箱和防病毒过滤
-^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 Postfix Virtual MailBox ClamSmtp Howto will teach you how to setup virtual mailboxes using non-Linux accounts where each user will authenticate using their email address with Dovecot POP3/IMAP server and ClamSMTP Antivirus to filter both incoming and out going mails for known viruses.
 
 发件人策略框架检测
-^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 Postfix SPF will show you how to add SPF checking to your existing Postfix setup. This allows your server to reject mail from unauthorized sources.
 
 设置DKIM电子邮件签名和验证
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 
 Postfix DKIM will guide you through the setup process of dkim-milter for you existing Postfix installation. This will allow your server to sign and verify emails using DKIM.
 
 添加Dspam
-^^^^^^^^^^
+------------------------
 
 Postfix Dspam will guide you through the setup process of dspam for you existing Postfix installation. This will enable on your mail server high quality statistical spam filter Dspam.
 
 完整的解决方案
-^^^^^^^^^^^^^^
+------------------------
 
 Postfix Complete Virtual Mail System Howto will help you if you are managing a large number of virtual domains at an ISP level or in a large corporation where you mange few hundred or thousand mail domains. This guide is appropriate if you are looking a complete solution with:
 
@@ -345,12 +345,12 @@ Postfix Complete Virtual Mail System Howto will help you if you are managing a l
 #. Log Analysis
 
 Dovecot LDAP
-^^^^^^^^^^^^^
+------------------------
 
 The Postfix/DovecotLDAP guide will help you configure Postfix to use Dovecot as MDA with LDAP users. 
 
 Dovecot SASL
-^^^^^^^^^^^^^
+------------------------
 
 The PostfixDovecotSASL guide will help you configure Postfix to use Dovecot's SASL implementation. Using Dovecot SASL may be preferable if you want to run Postfix in a chroot and need to use Cyrus SASL for other services.
 
